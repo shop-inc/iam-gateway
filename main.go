@@ -3,18 +3,24 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
-	"github.com/Duncanian/iam-gateway/server/controllers"
-	"github.com/gorilla/mux"
+	"github.com/99designs/gqlgen/handler"
+	"github.com/Duncanian/iam-gateway/server"
+	"github.com/Duncanian/iam-gateway/server/resolvers"
 )
 
-func handleRequests() {
-	router := mux.NewRouter().StrictSlash(true)
-	router.HandleFunc("/", controllers.HomePage)
-	router.HandleFunc("/auth", controllers.AllUsers)
-	log.Fatal(http.ListenAndServe(":8080", router))
-}
+const defaultPort = "8080"
 
 func main() {
-	handleRequests()
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = defaultPort
+	}
+
+	http.Handle("/", handler.Playground("GraphQL playground", "/query"))
+	http.Handle("/query", handler.GraphQL(server.NewExecutableSchema(server.Config{Resolvers: &resolvers.Resolver{}})))
+
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
