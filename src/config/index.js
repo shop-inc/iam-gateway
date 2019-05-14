@@ -5,14 +5,12 @@ dotenv.config();
 
 const envVarsSchema = joi
   .object({
-    PORT: joi.number().default(8080),
     GRPC_PORT: joi.number().default(50051),
     GRPC_HOST: joi.string().default('localhost'),
     NODE_ENV: joi
       .string()
       .allow(['development', 'test', 'staging'])
       .required(),
-    GOOGLE_AUTH_TOKEN: joi.string().required(),
   })
   .unknown()
   .required();
@@ -28,7 +26,6 @@ const config = {
   grpcPort: envVars.GRPC_PORT,
   grpcHost: envVars.GRPC_HOST,
   env: envVars.NODE_ENV || 'development',
-  googleAuthToken: envVars.GOOGLE_AUTH_TOKEN,
 };
 
 export default config;
