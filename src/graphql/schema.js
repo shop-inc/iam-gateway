@@ -5,6 +5,7 @@ type Query {
 
 type Mutation {
   createUser(googleToken: String!): User!
+  loginUser(googleToken: String!): User!
 }
 
 type User {
