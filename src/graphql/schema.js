@@ -6,6 +6,7 @@ type Query {
 type Mutation {
   createUser(googleToken: String!): User!
   loginUser(googleToken: String!): User!
+  verifyUser(emailToken: String!): VerificationMessage!
 }
 
 type User {
@@ -18,6 +19,16 @@ type User {
 type Profile {
   imageUrl: String!
   lastUpdated: String!
+}
+
+type VerificationMessage {
+  status: String!
+  verificationDetails: VerificationDetails!
+}
+
+type VerificationDetails {
+  verificationStatus: Boolean!
+  dateVerified: String!
 }
 `;
 

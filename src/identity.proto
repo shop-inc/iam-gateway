@@ -1,12 +1,22 @@
 syntax="proto3";
 
 service IdentityService {
-    rpc CreateUser (GoogleIdToken) returns (UserInfo) {}
-    rpc LoginUser (GoogleIdToken) returns (UserInfo) {}
+    rpc CreateUser (Token) returns (UserInfo) {}
+    rpc LoginUser (Token) returns (UserInfo) {}
+    rpc VerifyUser (Token) returns (VerificationMessage) {}
 }
 
-message GoogleIdToken {
+message Token {
     string token = 1;
+}
+
+message VerificationMessage {
+    string status = 1;
+    message VerificationDetails {
+        bool verificationStatus = 1;
+        string dateVerified = 2;
+    }
+    VerificationDetails verificationDetails = 2;
 }
 
 message UserInfo {

@@ -3,6 +3,7 @@ import procedures from '../procedures';
 const {
   createUser,
   loginUser,
+  verifyUser,
 } = procedures;
 
 const resolver = {
@@ -22,6 +23,14 @@ const resolver = {
       try {
         const loggedInUser = await loginUser(args.googleToken);
         return loggedInUser;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    verifyUser: async (parent, args) => {
+      try {
+        const verifiedUser = await verifyUser(args.emailToken);
+        return verifiedUser;
       } catch (error) {
         throw new Error(error);
       }
