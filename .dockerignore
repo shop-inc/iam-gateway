@@ -1,0 +1,13 @@
+node_modules/
+src/
+docker
+.github
+.env
+.gitignore
+README.md
+LICENSE
+yarn.lock
+.circleci
+coverage
+.babelrc
+.eslintrc.yml
