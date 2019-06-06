@@ -4,6 +4,7 @@ const {
   createUser,
   loginUser,
   verifyUser,
+  logoutUser,
 } = procedures;
 
 const resolver = {
@@ -31,6 +32,14 @@ const resolver = {
       try {
         const verifiedUser = await verifyUser(args.emailToken);
         return verifiedUser;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    logoutUser: async (parent, args) => {
+      try {
+        const loggedOutUser = await logoutUser(args.userToken);
+        return loggedOutUser;
       } catch (error) {
         throw new Error(error);
       }

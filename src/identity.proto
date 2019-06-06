@@ -4,6 +4,7 @@ service IdentityService {
     rpc CreateUser (Token) returns (UserInfo) {}
     rpc LoginUser (Token) returns (UserInfo) {}
     rpc VerifyUser (Token) returns (VerificationMessage) {}
+    rpc LogoutUser (Token) returns (LogoutMessage) {}
 }
 
 message Token {
@@ -28,4 +29,8 @@ message UserInfo {
     };
     Profile profile = 3;
     string token = 4;
+}
+
+message LogoutMessage {
+    string message = 1;
 }

@@ -7,6 +7,7 @@ type Mutation {
   createUser(googleToken: String!): User!
   loginUser(googleToken: String!): User!
   verifyUser(emailToken: String!): VerificationMessage!
+  logoutUser(userToken: String!): LogoutMessage!
 }
 
 type User {
@@ -29,6 +30,10 @@ type VerificationMessage {
 type VerificationDetails {
   verificationStatus: Boolean!
   dateVerified: String!
+}
+
+type LogoutMessage {
+  message: String!
 }
 `;
 
