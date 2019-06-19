@@ -33,7 +33,7 @@ const resolver = {
         const verifiedUser = await verifyUser(args.emailToken);
         return verifiedUser;
       } catch (error) {
-        throw new Error(error);
+        throw new Error(error.toString());
       }
     },
     logoutUser: async (parent, args) => {

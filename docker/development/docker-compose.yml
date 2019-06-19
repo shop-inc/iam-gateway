@@ -1,0 +1,23 @@
+version: '2.1'
+
+networks:
+  iam-gateway-net:
+    external:
+      name: iam-net-dev # The custom network from iam-server-dev
+
+services:
+  iam-gateway-dev:
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    container_name: 'iam-gateway-dev'
+    environment:
+      GRPC_HOST: iam-server-dev # The name of the grpc server container
+    networks:
+      - iam-gateway-net
+    volumes:
+      - /api/node_modules
+      - ../../:/api
+    ports:
+      - "4000:4000"
+    entrypoint: ["sh", "/api/docker/development/entrypoint.sh"]

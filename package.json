@@ -4,9 +4,13 @@
   "description": "This is a gateway that gives a way to connect to the grpc server",
   "main": "index.js",
   "scripts": {
-    "lint": "node_modules/.bin/eslint src/",
+    "build-server": "babel src --out-dir dist -s",
+    "clean": "rm -rf dist && mkdir dist",
+    "proto": "cp -R src/identity.proto dist",
+    "build": "yarn run clean && yarn run build-server && yarn proto",
+    "start": "node dist/index.js",
     "start:dev": "DEBUG=log nodemon --exec babel-node src/index.js",
-    "test": "jest"
+    "lint": "node_modules/.bin/eslint src/"
   },
   "repository": {
     "type": "git",
@@ -23,7 +27,8 @@
     "dotenv": "^8.0.0",
     "graphql-yoga": "^1.17.4",
     "grpc": "^1.20.3",
-    "joi": "^14.3.1"
+    "joi": "^14.3.1",
+    "net": "^1.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
