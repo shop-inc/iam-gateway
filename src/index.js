@@ -34,7 +34,7 @@ const conn = async () => {
 
     server.start(
       () => logger(
-        'Server is running on http://localhost:4000',
+        'Gateway is running 🚀',
       ),
     );
   } catch (error) {

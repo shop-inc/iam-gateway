@@ -8,8 +8,8 @@
     "clean": "rm -rf dist && mkdir dist",
     "proto": "cp -R src/identity.proto dist",
     "build": "yarn run clean && yarn run build-server && yarn proto",
-    "start": "node dist/index.js",
-    "start:dev": "DEBUG=log nodemon --exec babel-node src/index.js",
+    "start": "DEBUG=Shopinc:client node dist/index.js",
+    "start:dev": "DEBUG=Shopinc:client nodemon --exec babel-node src/index.js",
     "lint": "node_modules/.bin/eslint src/"
   },
   "repository": {
