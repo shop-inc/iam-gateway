@@ -10,6 +10,6 @@ COPY dist /api/dist
 
 COPY package.json /api
 
-RUN yarn install --no-lockfile --silent
+RUN yarn install --production=true --no-lockfile
 
 EXPOSE 4000
