@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iam-gateway-deployment
+  labels:
+    app: iam-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iam-gateway
+
+  template:
+    metadata:
+      name: iam-gateway-pod
+      labels:
+        app: iam-gateway
+    spec:
+      containers:
+        - name: iam-gateway
+          image: shopinc/iam-gateway:0.0.1
+          command: ['sh', '-c', 'yarn start']
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: iam-gateway-secrets
